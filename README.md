@@ -1,2 +1,2 @@
 # Space-Opera
-Game Jam April 2017
+Entry for the 'One Game A Month' Game Jam April 2017
