@@ -9,13 +9,19 @@ public class Ctrl : MonoBehaviour {
     public float lowerBound = -5f;
 
 	void FixedUpdate()
-	{
-        float newYPos = transform.position.y + (speed * Time.deltaTime * Input.GetAxisRaw("Vertical"));
+    {
+        float input = Input.GetAxisRaw("Vertical");
+        MoveShipPosition(input);
+    }
+
+    private void MoveShipPosition(float input)
+    {
+        float newYPos = transform.position.y + (speed * Time.deltaTime * input);
         if (newYPos > upperBound)
         {
             transform.position = new Vector3(transform.position.x, upperBound);
         }
-        else if(newYPos < lowerBound)
+        else if (newYPos < lowerBound)
         {
             transform.position = new Vector3(transform.position.x, lowerBound);
         }
@@ -23,5 +29,5 @@ public class Ctrl : MonoBehaviour {
         {
             transform.position = new Vector3(transform.position.x, newYPos);
         }
-	}
+    }
 }
