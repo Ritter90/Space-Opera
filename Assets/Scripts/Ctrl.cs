@@ -7,7 +7,7 @@ public class Ctrl : MonoBehaviour {
 	public Quaternion originalRotationValue;
 	public Quaternion maxUpRotationValue;
 	public Quaternion minDownRotationValue;
-	float rotationResetSpeed = 0.3f;
+	float rotationResetSpeed = 0.1f;
     public float upperBound = 5f;
     public float lowerBound = -5f;
 
@@ -24,28 +24,23 @@ public class Ctrl : MonoBehaviour {
     }
 
 	void Update (){
-		print ("value " + originalRotationValue);
 		if (Input.GetKey ("down")) {
-			gameObject.transform.Rotate(0, 0, -1);
-			print (transform.rotation.z);
-			if (transform.rotation.z < -0.4) {
-				gameObject.transform.rotation = Quaternion.Slerp (transform.rotation, minDownRotationValue, Time.time * rotationResetSpeed);
+			if (transform.rotation.z > -0.4) {
+				gameObject.transform.Rotate(0, 0, -1);
 			}
+
 		}
 
-		if (Input.GetKey ("up")) {
-			gameObject.transform.Rotate (0, 0, 1);
-			print (transform.rotation.z);
-			if (transform.rotation.z > 0.4) {
-				maxUpRotationValue = Quaternion (0.0, 0.0, 0.4, 0.0);
-				gameObject.transform.rotation = Quaternion.Slerp (transform.rotation, maxUpRotationValue, Time.time * rotationResetSpeed);
+		else if (Input.GetKey ("up")) {
+			
+			if (transform.rotation.z < 0.4) {
+				gameObject.transform.Rotate (0, 0, 1);
 			}
 
 		} 
 		else {
-			if (transform.rotation.z > 0.2 || transform.rotation.z < -0.2) {
 				gameObject.transform.rotation = Quaternion.Slerp (transform.rotation, originalRotationValue, Time.time * rotationResetSpeed);
-			}
+
 		}
 				
 	}
